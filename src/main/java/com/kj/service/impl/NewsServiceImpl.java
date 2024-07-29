@@ -40,16 +40,17 @@ public class NewsServiceImpl extends ServiceImpl<NewsMapper, News> implements Ne
         if (nonentityNewsCategory(dto.getNewsCategoryId())) {
             throw new HintException("此新闻类别不存在");
         }
-        Integer newCategoryId = dto.getNewsCategoryId();
-        NewsCategory newsCategory = newsCategoryMapper.selectOne(new QueryWrapper<NewsCategory>().select(NewsCategoryService.DISPLAY_CONTENT).eq(NewsCategoryService.ID, newCategoryId));
+        //修改小标题新闻数量限制
+//        Integer newCategoryId = dto.getNewsCategoryId();
+//        NewsCategory newsCategory = newsCategoryMapper.selectOne(new QueryWrapper<NewsCategory>().select(NewsCategoryService.DISPLAY_CONTENT).eq(NewsCategoryService.ID, newCategoryId));
         // 小标题为新闻类型时，该标题下只能存储一篇新闻
-        if (newsCategory.getDisplayContent() == DisplayContent.NEWS) {
-            // 检查该标题下是否存在新闻
-            int count = count(new QueryWrapper<News>().eq(NEWS_CATEGORY_ID, newCategoryId));
-            if (count >= 1) {
-                throw new HintException("该类别下只能存在一篇新闻");
-            }
-        }
+//        if (newsCategory.getDisplayContent() == DisplayContent.NEWS) {
+//            // 检查该标题下是否存在新闻
+//            int count = count(new QueryWrapper<News>().eq(NEWS_CATEGORY_ID, newCategoryId));
+//            if (count >= 1) {
+//                throw new HintException("该类别下只能存在一篇新闻");
+//            }
+//        }
         // 判断图片是否为空
         if (dto.getPictureFile() != null) {
             String s = HeaderImgUpload.headPortraitUpload(dto.getPictureFile());
@@ -73,18 +74,19 @@ public class NewsServiceImpl extends ServiceImpl<NewsMapper, News> implements Ne
         if (dto.getNewsCategoryId() != null && nonentityNewsCategory(dto.getNewsCategoryId())) {
             throw new HintException("此新闻类别不存在");
         }
+        //修改小标题新闻数量限制
         // dto.getNewsCategoryId() 不为null 说明新闻类别可能会更改，需要判断更改后的类别是否是只能存储一篇新闻的展示新闻类型
-        if (dto.getNewsCategoryId() != null) {
-            Integer newCategoryId = dto.getNewsCategoryId();
-            NewsCategory newsCategory = newsCategoryMapper.selectOne(new QueryWrapper<NewsCategory>().select(NewsCategoryService.DISPLAY_CONTENT).eq(NewsCategoryService.ID, newCategoryId));
-            if (newsCategory.getDisplayContent() == DisplayContent.NEWS) {
-                // 检查该标题下是否存在新闻
-                int count = count(new QueryWrapper<News>().eq(NEWS_CATEGORY_ID, newCategoryId));
-                if (count >= 1) {
-                    throw new HintException("该类别下只能存在一篇新闻");
-                }
-            }
-        }
+//        if (dto.getNewsCategoryId() != null) {
+//            Integer newCategoryId = dto.getNewsCategoryId();
+//            NewsCategory newsCategory = newsCategoryMapper.selectOne(new QueryWrapper<NewsCategory>().select(NewsCategoryService.DISPLAY_CONTENT).eq(NewsCategoryService.ID, newCategoryId));
+//            if (newsCategory.getDisplayContent() == DisplayContent.NEWS) {
+//                // 检查该标题下是否存在新闻
+//                int count = count(new QueryWrapper<News>().eq(NEWS_CATEGORY_ID, newCategoryId));
+//                if (count >= 1) {
+//                    throw new HintException("该类别下只能存在一篇新闻");
+//                }
+//            }
+//        }
         // 需要修改图片
         if (dto.getPictureFile() != null) {
             String s = HeaderImgUpload.headPortraitUpload(dto.getPictureFile());
