@@ -1,14 +1,14 @@
-# 新闻学院官网
+# 科普网
 
 #### 介绍
-新闻与传播学院官网
+科普网后端
 
 #### 软件架构
 软件架构说明（前后端分离）
 
 - 后端：SpringBoot、Shiro、Mybatis-Plus
+- [前端源码链接](https://github.com/chengnans/kepu_UI/tree/master)
 
-- 前端gitee：https://gitee.com/rendongc/xin-chuan.git
 
 #### 预览图片
 Swagger
